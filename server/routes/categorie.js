@@ -1,0 +1,8 @@
+const express = require("express");
+const service = require("../services/categorie")
+const router = express.Router();
+
+// ➤ Récupérer tous les utilisateurs
+router.get("/", service.getCategories);
+
+module.exports = router;
