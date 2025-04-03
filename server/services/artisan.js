@@ -13,3 +13,12 @@ exports.getArtisans = async (req, res) => {
     res.status(500).json({ message: "Artisans not found" });
   }
 };
+
+exports.getOneArtisan = async (req, res) => {
+  try {
+    const artisan = await Artisan.findOne();
+    res.json(artisan);
+  } catch (error) {
+    res.status(500).json({message: "Artisan not found"});
+  }
+};

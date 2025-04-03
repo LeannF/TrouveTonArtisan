@@ -25,6 +25,6 @@ app.use((req, res) => {
   res.status(404).json({ message: "Route non trouvée" });
 });
 
-app.listen(3000, () => console.log("🚀 Serveur démarré sur http://localhost:3000"));
+app.listen(5000, () => console.log("🚀 Serveur démarré sur http://localhost:5000"));
 
 module.exports = app;

@@ -13,3 +13,12 @@ exports.getCategories = async (req, res) => {
         res.status(500).json({ message: "Categories not found" });
     }
 };
+
+exports.getOneCategorie = async (req, res) => {
+    try {
+      const categorie = await Categorie.findOne();
+      res.json(categorie);
+    } catch (error) {
+      res.status(500).json({message: "Categorie not found"});
+    }
+};

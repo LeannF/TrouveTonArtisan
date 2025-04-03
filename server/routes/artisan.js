@@ -4,5 +4,6 @@ const service = require("../services/artisan")
 
 // ➤ Récupérer tous les utilisateurs
 router.get("/", service.getArtisans);
+router.get("/", service.getOneArtisan);
 
 module.exports = router;

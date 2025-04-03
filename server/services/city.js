@@ -13,3 +13,12 @@ exports.getCities = async (req, res) => {
         res.status(500).json({ message: "Cities not found" });
     }
 };
+
+exports.getOneCity = async (req, res) => {
+    try {
+      const city = await City.findOne();
+      res.json(city);
+    } catch (error) {
+      res.status(500).json({message: "City not found"});
+    }
+};

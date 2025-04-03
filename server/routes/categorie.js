@@ -4,5 +4,7 @@ const router = express.Router();
 
 // ➤ Récupérer tous les utilisateurs
 router.get("/", service.getCategories);
+router.get("/", service.getOneCategorie);
+
 
 module.exports = router;

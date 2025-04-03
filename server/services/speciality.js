@@ -13,3 +13,12 @@ exports.getSpecialities = async (req, res) => {
         res.status(500).json({ message: "Specialities not found" });
     }
 };
+
+exports.getOneSpeciality = async (req, res) => {
+    try {
+      const speciality = await Speciality.findOne();
+      res.json(speciality);
+    } catch (error) {
+      res.status(500).json({message: "Speciality not found"});
+    }
+};

@@ -2,7 +2,7 @@ const { DataTypes } = require('sequelize');
 const sequelize = require('../db/config'); // Importer la connexion Sequelize
 
 const City = sequelize.define(
-  'City',
+  'Ville',
   {
     // Model attributes are defined here
     id_ville: {
