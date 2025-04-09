@@ -1,4 +1,4 @@
-const Specialite = require('../models');
+const {Specialite} = require('../models');
 
 exports.getSpecialities = async (req, res) => {
   try {
