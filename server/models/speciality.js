@@ -1,7 +1,7 @@
 const { DataTypes } = require('sequelize');
 const sequelize = require('../db/config'); // Importer la connexion Sequelize
 
-const Speciality = sequelize.define(
+const Specialite = sequelize.define(
   'Specialite',
   {
     // Model attributes are defined here
@@ -25,4 +25,16 @@ const Speciality = sequelize.define(
   },
 );
 
-module.exports = Speciality;
+Specialite.associate = (models) => {
+  Specialite.hasMany(models.Artisan, {
+    foreignKey: 'id_specialite',
+    sourceKey: 'id_specialite',
+  });
+
+  Specialite.belongsTo(models.Categorie, {
+    foreignKey: 'id_categorie',
+    targetKey: 'id_categorie',
+  });
+};
+
+module.exports = Specialite;

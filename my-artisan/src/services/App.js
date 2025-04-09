@@ -1,8 +1,8 @@
 "use client"; 
 import { useEffect, useState } from "react";
-import { getArtisans } from "../services/artisan";
+import { getArtisans } from "./artisan";
 
-const App = () => {
+const Users = () => {
   const [artisans, setArtisans] = useState([]);
   const [nameArtisan, setNameArtisan] = useState("");
   const [email, setEmail] = useState("");
@@ -27,13 +27,11 @@ const App = () => {
       <p>Chargement...</p>
     ) : (
       <ul>
-        {artisans.map((artisan) => (
-          <li key={artisan.id}>{artisan.name}</li>
-        ))}
+          <li key={artisan.id_artisan}>{artisan.nom_artisan}</li>
       </ul>
     )}
     </div>
   );
 }
 
-export default App;
+export default Users;

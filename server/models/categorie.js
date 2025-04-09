@@ -21,4 +21,17 @@ const Categorie = sequelize.define(
   },
 );
 
+Categorie.associate = (models) => {
+  Categorie.hasMany(models.Artisan, {
+    foreignKey: 'id_categorie',
+    sourceKey: 'id_categorie',
+  });
+
+  Categorie.hasMany(models.Specialite, {
+    foreignKey: 'id_categorie',
+    sourceKey: 'id_categorie',
+  });
+};
+
+
 module.exports = Categorie;

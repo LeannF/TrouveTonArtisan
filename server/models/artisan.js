@@ -15,7 +15,7 @@ const Artisan = sequelize.define(
       unique: true,
     },
     id_specialite: {
-      type: DataTypes.STRING,
+      type: DataTypes.INTEGER,
       allowNull: false,
     },
     note: {
@@ -23,7 +23,7 @@ const Artisan = sequelize.define(
       allowNull: true,
     },
     id_ville: {
-      type: DataTypes.STRING,
+      type: DataTypes.INTEGER,
       allowNull: false,
     },
     apropos: {
@@ -46,7 +46,7 @@ const Artisan = sequelize.define(
       },
     },
     id_categorie: {
-      type: DataTypes.STRING,
+      type: DataTypes.INTEGER,
       allowNull: false,
     },
     top: {
@@ -54,10 +54,29 @@ const Artisan = sequelize.define(
       defaultValue: false,
     },
   },
+ 
   {
     freezeTableName: true, // Empêche Sequelize de modifier le nom de la table
     timestamps: false,
+    
   },
 );
+
+Artisan.associate = (models) => {
+  Artisan.belongsTo(models.Specialite, {
+    foreignKey: 'id_specialite',
+    targetKey: 'id_specialite',
+  });
+
+  Artisan.belongsTo(models.Categorie, {
+    foreignKey: 'id_categorie',
+    targetKey: 'id_categorie',
+  });
+
+  Artisan.belongsTo(models.City, {
+    foreignKey: 'id_ville',
+    targetKey: 'id_ville',
+  })
+};
 
 module.exports = Artisan;

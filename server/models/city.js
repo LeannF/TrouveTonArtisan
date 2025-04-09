@@ -21,4 +21,11 @@ const City = sequelize.define(
   },
 );
 
+City.associate = (models) => {
+  City.hasMany(require(models.artisan), { 
+    foreignKey: "id_ville", 
+    sourceKey: "id_ville", 
+  });
+};
+
 module.exports = City;
