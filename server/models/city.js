@@ -22,9 +22,8 @@ const City = sequelize.define(
 );
 
 City.associate = (models) => {
-  City.hasMany(require(models.artisan), { 
+  City.hasMany(models.Artisan, { 
     foreignKey: "id_ville", 
-    sourceKey: "id_ville", 
   });
 };
 

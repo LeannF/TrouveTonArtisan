@@ -76,7 +76,7 @@ Artisan.associate = (models) => {
   Artisan.belongsTo(models.City, {
     foreignKey: 'id_ville',
     targetKey: 'id_ville',
-  })
+  });
 };
 
 module.exports = Artisan;

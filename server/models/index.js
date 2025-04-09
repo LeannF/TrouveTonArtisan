@@ -4,6 +4,7 @@ const sequelize = require('../db/config');
 const Artisan = require('./artisan');
 const Specialite = require('./Speciality');
 const Categorie = require('./Categorie');
+const City = require('./City');
 
 const db = {
   sequelize,
@@ -11,6 +12,7 @@ const db = {
   Artisan,
   Specialite,
   Categorie,
+  City,
 };
 
 // On appelle tous les `associate()` après que les modèles soient définis
