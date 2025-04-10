@@ -29,18 +29,31 @@ exports.getArtisans = async (req, res) => {
   }
 };
 
-exports.getTop = async(req, res) => {
-  try {
-    // Attends que les artisans soient récupérées
-    const topArtisan = await Artisan.findAll({
-      where: {top : true}
+exports.getArtisansFromCat = async(req, res) => {
+  try{
+    const {nomCat} = req.params;
+    const artisans = await Artisan.findAll({
+      include: [
+      {
+        model: City,
+        attributes: [`nom_ville`],
+      },
+      {
+        model: Specialite,
+        attributes: [`nom_specialite`],
+      },
+        {
+          model: Categorie,
+          where: {nom_categorie: nomCat},
+        }
+      ],
     }); 
     
     // Envoie les artisans sous forme de réponse JSON
-    res.json(topArtisan); 
+    res.json(artisans); 
   } catch (error) {
     console.error(error); // Logge l'erreur pour débogage
     // Envoie un message d'erreur si une exception se produit
-    res.status(500).json({ message: "Artisan's top not found" });
+    res.status(500).json({ message: "Artisans not found" });
   }
 };

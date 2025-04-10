@@ -1,6 +1,6 @@
 const Mentions = () => {
     <main>
-        <h1>Page en construction</h1>
+        <h1>Page en construction...</h1>
     </main>
 }
 
