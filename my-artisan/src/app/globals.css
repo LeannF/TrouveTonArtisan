@@ -45,3 +45,7 @@ body {
 button{
   background-color: #CD2C2E;
 }
+
+h1, h2 {
+  text-align: center;
+}

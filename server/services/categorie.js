@@ -17,12 +17,12 @@ exports.getCategories = async (req, res) => {
 exports.getOneCategorie = async (req, res) => {
   try {
     const {nomCat} = req.params;
-    // Attends que les villes soient récupérées
-    const categorie = await Categorie.findAll({
+    // Attends que les categories soient récupérées
+    const categorie = await Categorie.findOne({
       where: {nom_categorie : nomCat}
     }); 
     
-    // Envoie les artisans sous forme de réponse JSON
+    // Envoie les categories sous forme de réponse JSON
     res.json(categorie); 
   } catch (error) {
     console.error(error); // Logge l'erreur pour débogage

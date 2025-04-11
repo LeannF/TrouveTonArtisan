@@ -19,13 +19,14 @@ const Card = () => {
             <div className="card-header">
               <h2 className="card-title">{artisan.nom_artisan}</h2>
             </div>
-            <div className="card-body">
+            <div className="card-body d-flex">
               <h3 className="card-subtitle mb-2 text-body-secondary">
                 {artisan.Specialite.nom_specialite}
               </h3>
               <h3 className="card-subtitle">
                 {artisan.Ville.nom_ville}
               </h3>
+              <span>{artisan.note}</span>
             </div>
           </div>
         ))}

@@ -29,6 +29,23 @@ exports.getArtisans = async (req, res) => {
   }
 };
 
+exports.getArtisanByName = async(req, res) => {
+  try {
+    const {nomArt} = req.params;
+    // Attends que l'artisan soit récupéré
+    const artisan = await Artisan.findOne({
+      where: {nom_artisan : nomArt}
+    }); 
+    
+    // Envoie l'artisan sous forme de réponse JSON
+    res.json(artisan); 
+  } catch (error) {
+    console.error(error); // Logge l'erreur pour débogage
+    // Envoie un message d'erreur si une exception se produit
+    res.status(500).json({ message: "Artisan not found" });
+  }
+}
+
 exports.getArtisansFromCat = async(req, res) => {
   try{
     const {nomCat} = req.params;
