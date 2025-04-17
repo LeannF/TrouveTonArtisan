@@ -24,15 +24,33 @@ const ListeArtisan = () => {
       });
   }, [categorie]); // Se déclenche chaque fois que la catégorie change
 
+  {artisans.map((artisan, index) => {
+    let colClass = 'col-md-4';
+
+    // Si 4 cards → 2 par ligne
+    if (artisans.length === 4) {
+      colClass = 'col-md-6';
+    }
+
+    // Si 5 cards → 2 dernières centrées
+    if (artisans.length === 5 && index >= 3) {
+      colClass = 'col-md-4';
+      // Centrer les deux dernières en ajoutant un offset
+      if (index === 3) {
+        colClass += ' offset-md-2'; // Pousse la carte vers la droite
+      }
+    }
+  })};
+
   return (
     <main>
       <h1 className="text-center m-4">Liste des Artisans </h1>
-      <div className="row">
+      <div className="row justify-content-center">
         {artisans.length === 0 ? (
           <p>Aucun artisan trouvé pour cette catégorie.</p>
         ) : (
           artisans.map((artisan) => (
-            <div key={artisan.id_artisan} className="card m-4 col-4">
+            <div key={artisan.id_artisan} className="card col-sm-12 col-md-4 m-3 mb-4" id="card-list">
               <div className="card-header">
                 <h2 className="card-title">{artisan.nom_artisan}</h2>
               </div>

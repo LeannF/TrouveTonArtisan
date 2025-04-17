@@ -1,13 +1,16 @@
 "use client";
 import Link from 'next/link';
-import "./css/Navbar.css";
+import "./css/navbar.css";
 import { useEffect, useState } from "react";
-import { useRouter } from 'next/navigation';
 
 const Navbar = () => {
+    useEffect(() => {
+        import('bootstrap/dist/js/bootstrap.bundle.min.js').then((Bootstrap) => {
+
+        });
+    }, []);
     const [search, setSearch] = useState('');
     const [results, setResults] = useState([]); // Assurez-vous que results est un tableau vide
-    const router = useRouter();
 
     const handleSearch = async (query) => {
         if (query.trim() === '') {
@@ -16,12 +19,13 @@ const Navbar = () => {
         }
 
         try {
-            const response = await fetch(`http://localhost:5000/artisan/search?q=${encodeURIComponent(query)}`);
+            const response = await fetch(`http://localhost:5000/artisan/${encodeURIComponent(query)}`);
             if (!response.ok) {
                 throw new Error('Erreur de réseau');
             }
             const data = await response.json();
             setResults(Array.isArray(data) ? data : []); // S'assurer que les résultats sont bien un tableau
+            console.log("Resultats: ", results)
         } catch (error) {
             console.error('Erreur lors de la récupération des données: ', error);
         }
@@ -33,26 +37,21 @@ const Navbar = () => {
         handleSearch(query); // Appelle l'API dès qu'il y a un changement
     };
 
-    const handleRedirect = () => {
-        if (search.trim()) {
-            // Redirige vers la page des résultats avec le paramètre de recherche
-            router.push(`/ficheArtisan/${encodeURIComponent(search)}`);
-        }
-    };
-
     return (
-        <nav className="navbar navbar-expand-lg z-2">
+        <nav className="navbar navbar-expand-lg">
             <div className="container-fluid">
-                <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
+                <button className="navbar-toggler position-absolute m-2 top-0 end-0" type="button" data-bs-toggle="collapse" data-bs-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
                     <span className="navbar-toggler-icon"></span>
                 </button>
 
                 <div className="row">
                     <div className="col-8" id="logo">
-                        <img src="/assets/logo/logo.png" alt="Logo trouve ton artisan" />
+                        <Link href="/">
+                            <img src="/assets/logo/logo.png" alt="Logo trouve ton artisan"/>
+                        </Link>
                     </div>
-                    <div className="col-4 collapse navbar-collapse" id="navbarText">
-                        <ul className="navbar-nav ms-auto mb-2 mb-lg-0">
+                    <div className="collapse navbar-collapse col-4 end-0" id="navbarText">
+                        <ul className="navbar-nav end-0">
                             <li className="nav-item">
                                 <Link className="nav-link active" href="/listeArtisan/services">Services</Link>
                             </li>
@@ -66,25 +65,26 @@ const Navbar = () => {
                                 <Link className="nav-link active" href="/listeArtisan/batiment">Bâtiment</Link>
                             </li>
                         </ul>
-                    </div>
-                    <form className="d-flex end-0" role="search" onSubmit={(e)=>{e.preventDefault(); handleRedirect();}}>
-                        <input className="form-control" type="search" placeholder="Rechercher un artisan"
-                            value={search}
-                            onChange={handleChange}
-                            aria-label="Search"
-                        />
+                    </div>    
+                </div>
+                <div className="position-relative col-md-4 col-sm-6" id="searchBar">
+                        <div className="d-flex position-relative ">
+                            <input className="form-control" type="search" placeholder="Rechercher un artisan"
+                                value={search}
+                                onChange={handleChange}
+                            />
+                            <button className="bi bi-search position-absolute end-0"></button>
+                        </div>
                         {Array.isArray(results) && results.length > 0 && (
-                            <ul className="absolute top-full left-0 w-full bg-white border border-gray-300 mt-2 rounded-lg shadow-lg z-10">
+                            <ul className="position-absolute bg-white border border-gray-300 mt-1 p-2 link list-group" id="resultList">
                                 {results.map((artisan) => (
-                                    <li key={artisan.id_artisan} onClick={() => { setSearch(artisan.nom_artisan); handleRedirect(); }} className="p-2 hover:bg-gray-200 cursor-pointer">
-                                        {artisan.nom_artisan}
+                                    <li key={artisan.id_artisan}  className="py-2">
+                                        <Link className="link" href={`/ficheArtisan/${encodeURIComponent(artisan.nom_artisan)}`} onClick={() => {setSearch(artisan.nom_artisan); setResults([]);}} >{artisan.nom_artisan}</Link>
                                     </li>
                                 ))}
                             </ul>
                         )}
-                        <button className="btn" type="submit">Rechercher un artisan</button>
-                    </form>
-                </div>
+                    </div>  
             </div>
         </nav>
     );

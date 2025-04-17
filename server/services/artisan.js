@@ -1,3 +1,4 @@
+const { Op } = require ("sequelize");
 const { Artisan, Specialite, Categorie, City } = require('../models');
 
 exports.getArtisans = async (req, res) => {
@@ -33,8 +34,22 @@ exports.getArtisanByName = async(req, res) => {
   try {
     const {nomArt} = req.params;
     // Attends que l'artisan soit récupéré
-    const artisan = await Artisan.findOne({
-      where: {nom_artisan : nomArt}
+    const artisan = await Artisan.findAll({
+      include: [
+        {
+          model: City,
+          attributes: [`nom_ville`],
+        },
+        {
+          model: Specialite,
+          attributes: [`nom_specialite`],
+        },
+        {
+          model: Categorie,
+          attributes: [`nom_categorie`],
+        }
+      ],
+      where: {nom_artisan : {[Op.like]: `%${nomArt}%`}}
     }); 
     
     // Envoie l'artisan sous forme de réponse JSON
