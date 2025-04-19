@@ -16,10 +16,14 @@ ul{
     padding: 1em;
 }
 
+.nav-link:hover{
+    color: #0074C7 !important;
+}
+
 #navbarText {
     position: absolute;
     top: 2em;
-    margin-right: 5em;
+    margin-right: 10%;
 }
 
 #searchBar{
@@ -51,7 +55,7 @@ ul{
     font-size: 1.35em;
 }
 
-@media (max-width: 576px) {
+@media (max-width: 820px) {
     img{
         height: 110px;
         width: 170px;
@@ -73,12 +77,10 @@ ul{
         margin: 0.30em;
     }
     #searchBar{
-        margin-top: 0;
+        margin-top: 5%;
     }
     .form-control{
         top: 3%;
-        right: 0;
-        margin-left: 5em;
         width: 60%;
     }
     .form-control input {
@@ -93,10 +95,15 @@ ul{
     }
 }
 
-#resultList {
-    width: max-content;
+@media (width: 1024px) {
+    #navbarText {
+        margin-right: 20%;
+    }
+    #searchBar{
+        margin-top: 15%;
+    }
 }
 
-Link:hover {
-    color: #0074C7;
+#resultList {
+    width: max-content;
 }

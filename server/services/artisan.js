@@ -1,4 +1,6 @@
 const { Op } = require ("sequelize");
+require("dotenv").config();
+const nodemailer = require('nodemailer');
 const { Artisan, Specialite, Categorie, City } = require('../models');
 
 exports.getArtisans = async (req, res) => {
@@ -87,5 +89,45 @@ exports.getArtisansFromCat = async(req, res) => {
     console.error(error); // Logge l'erreur pour débogage
     // Envoie un message d'erreur si une exception se produit
     res.status(500).json({ message: "Artisans not found" });
+  }
+};
+
+exports.sendEmail = async (req, res) => {
+  if (req.method !== 'POST') {
+    return res.status(405).send('Méthode non autorisée');
+  }
+
+  const { nomArt, prenom, nom, email, message } = req.body;
+
+  try {
+    const artisan = await Artisan.findOne({ where: { nom_artisan: { [Op.like]: `%${nomArt}%` } } });
+
+    if (!artisan) {
+      return res.status(404).json({ message: `Aucun artisan trouvé pour le nom : ${nomArt}` });
+    }
+
+    const transporter = nodemailer.createTransport({
+      service: 'gmail',
+      port: 587,
+      secure: false,
+      auth: {
+        user: process.env.EMAIL_SENDER,
+        pass: process.env.EMAIL_PASS,
+      },
+    });
+
+    const mailOptions = {
+      from: `"${prenom} ${nom}" <${email}>`,
+      to: artisan.email,
+      subject: `Message de ${prenom} ${nom}`,
+      text: `Nom: ${prenom} ${nom}\nEmail: ${email}\nMessage: ${message}`,
+    };
+
+    await transporter.sendMail(mailOptions);
+    res.status(200).json({ message: 'Message envoyé !' });
+
+  } catch (err) {
+    console.error("Erreur lors de l'envoi :", err);
+    res.status(500).json({ message: 'Erreur : ' + err.message });
   }
 };

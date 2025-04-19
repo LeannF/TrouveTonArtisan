@@ -1,7 +1,9 @@
-const Cookie = () => {
-    <main>
-        <h1>Page en construction</h1>
-    </main>
+import ComingSoon from "../components/incoming";
+
+function Cookie () {
+    return(
+        <ComingSoon title="Cookies"/>
+    )
 }
 
 export default Cookie;

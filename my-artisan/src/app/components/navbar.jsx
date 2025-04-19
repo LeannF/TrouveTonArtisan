@@ -9,8 +9,25 @@ const Navbar = () => {
 
         });
     }, []);
+    
     const [search, setSearch] = useState('');
     const [results, setResults] = useState([]); // Assurez-vous que results est un tableau vide
+    const [categories, setCat] = useState([]);
+
+    useEffect(() => {
+        if (!categories) return; // Si aucune catégorie n'est présente, on ne fait rien
+    
+        // Fetch les artisans en fonction de la catégorie
+        fetch(`http://localhost:5000/categorie/`)
+          .then((res) => res.json())
+          .then((data) => {
+            console.log("Catégories récupérées :", data);
+            setCat(data);
+          })
+          .catch((error) => {
+            console.error("Erreur lors de la récupération des catégories :", error);
+          });
+      }, []); 
 
     const handleSearch = async (query) => {
         if (query.trim() === '') {
@@ -50,41 +67,34 @@ const Navbar = () => {
                             <img src="/assets/logo/logo.png" alt="Logo trouve ton artisan"/>
                         </Link>
                     </div>
-                    <div className="collapse navbar-collapse col-4 end-0" id="navbarText">
-                        <ul className="navbar-nav end-0">
-                            <li className="nav-item">
-                                <Link className="nav-link active" href="/listeArtisan/services">Services</Link>
-                            </li>
-                            <li className="nav-item">
-                                <Link className="nav-link active" href="/listeArtisan/fabrication">Fabrication</Link>
-                            </li>
-                            <li className="nav-item">
-                                <Link className="nav-link active" href="/listeArtisan/alimentation">Alimentation</Link>
-                            </li>
-                            <li className="nav-item">
-                                <Link className="nav-link active" href="/listeArtisan/batiment">Bâtiment</Link>
-                            </li>
-                        </ul>
-                    </div>    
+                        <div className="collapse navbar-collapse col-4 end-0" id="navbarText">
+                            <ul className="navbar-nav z-3 end-0">
+                                {categories.map((categorie) => (
+                                    <li key={categorie.id_categorie} className="nav-item">
+                                        <Link className="nav-link active" href={`/listeArtisan/${categorie.nom_categorie}`}>{categorie.nom_categorie}</Link>
+                                    </li>      
+                                ))}
+                            </ul>                    
+                        </div>  
                 </div>
                 <div className="position-relative col-md-4 col-sm-6" id="searchBar">
-                        <div className="d-flex position-relative ">
-                            <input className="form-control" type="search" placeholder="Rechercher un artisan"
-                                value={search}
-                                onChange={handleChange}
-                            />
-                            <button className="bi bi-search position-absolute end-0"></button>
-                        </div>
-                        {Array.isArray(results) && results.length > 0 && (
-                            <ul className="position-absolute bg-white border border-gray-300 mt-1 p-2 link list-group" id="resultList">
-                                {results.map((artisan) => (
-                                    <li key={artisan.id_artisan}  className="py-2">
-                                        <Link className="link" href={`/ficheArtisan/${encodeURIComponent(artisan.nom_artisan)}`} onClick={() => {setSearch(artisan.nom_artisan); setResults([]);}} >{artisan.nom_artisan}</Link>
-                                    </li>
-                                ))}
-                            </ul>
-                        )}
-                    </div>  
+                    <div className="d-flex justify-content-center position-relative">
+                        <input className="form-control" type="search" placeholder="Rechercher un artisan"
+                            value={search}
+                            onChange={handleChange}
+                        />
+                        <button className="bi bi-search position-absolute end-0"></button>
+                    </div>
+                    {Array.isArray(results) && results.length > 0 && (
+                        <ul className="position-absolute bg-white border border-gray-300 mt-1 p-2 z-2 list-group" id="resultList">
+                            {results.map((artisan) => (
+                                <li key={artisan.id_artisan}  className="py-2">
+                                    <Link className="link" href={`/ficheArtisan/${encodeURIComponent(artisan.nom_artisan)}`} onClick={() => {setSearch(artisan.nom_artisan); setResults([]);}} >{artisan.nom_artisan}</Link>
+                                </li>
+                            ))}
+                        </ul>
+                    )}
+                </div>  
             </div>
         </nav>
     );

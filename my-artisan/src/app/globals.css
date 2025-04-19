@@ -53,20 +53,54 @@ body {
 }
 
 h1, h2 {
+  padding: 0.5em;
   text-align: center;
+  color: #cd2c2e;
 }
 
 .card{
   width: 100%;
   max-width: 450px;
+  box-shadow: 0 5px 15px #384050;
 }
 
 .link{
   text-decoration: none;
-  color: black;
+  color: black ;
+}
+
+.link:hover{
+  color: #0074C7 !important;
+}
+
+ol {
+  list-style-position: inside;
+  text-align: center;
+  font-size: larger;
 }
 
 #card-list{
   width: 100%;
   max-width: 450px;
+  text-decoration: none;
+}
+
+.card-body{
+  display: flex;
+  justify-content: space-between;
+}
+
+.rating{
+  display: flex;
+  align-items: center; 
+  justify-content: flex-end;
+}
+
+.bi[class*="star"]{
+  color: #82b864 !important;
+}
+
+form{
+  width: 50%;
+  margin: auto;
 }
