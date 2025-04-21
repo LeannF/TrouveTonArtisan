@@ -3,6 +3,7 @@ import Link from 'next/link';
 import { useEffect, useState } from "react";
 import { usePathname } from 'next/navigation';
 
+
 const FicheArtisan = () => {
   const pathname = usePathname(); // Utilisation de usePathname pour récupérer l'URL
   const artisanName  = decodeURIComponent(pathname.split("/").pop()); // nom_artisan depuis l'URL
@@ -82,12 +83,12 @@ const FicheArtisan = () => {
   return (
     <main>
       <h1 className="text-center m-4">Fiche de l'Artisan</h1>
-      <div className=" mb-4">
+      <div className="mb-4">
         {artisan === null ? (
           <p>Aucun artisan de ce nom trouvé.</p>
         ) : (
-            <div key={artisan.id_artisan} className="row">
-              <div className="card col-md-6 col-sm-12 m-auto mb-4">
+            <div key={artisan.id_artisan}>
+              <div className="card m-auto mb-4" id="artisanCard">
                 <div className="card-header">
                   <h2 className="card-title">{artisan.nom_artisan}</h2>
                 </div>
@@ -105,18 +106,24 @@ const FicheArtisan = () => {
                   <span className="rating">{renderStars(artisan.note, artisan.id_artisan)}</span>
                 </div>
                 <div className="card-footer text-center">
-                  <Link href={`${artisan.lien_site}`}>{artisan.lien_site}</Link> 
+                {artisan.lien_site ? (
+                  <Link href={artisan.lien_site} target="_blank" rel="noopener noreferrer">
+                    {artisan.lien_site}
+                  </Link>
+                ) : (
+                  <p>Aucun site disponible</p>
+                )} 
                 </div>
               </div>
-              <section className="col-md-6 col-sm-12">
-                <p className="d-flex">{artisan.apropos}</p>
+              <section className="text-box p-5">
+                <p className=" mx-4">{artisan.apropos}</p>
               </section>
             </div>       
         )}
       </div>
       <div>
         <h2>Formulaire de contact</h2>
-        <form className="" onSubmit={handleSubmit}>
+        <form onSubmit={handleSubmit}>
           <section className="mb-3 ">
             <label htmlFor="firstname" className="form-label">Prénom</label>
             <input type="firstname" className="form-control" id="firstname" placeholder="Prénom" onChange={(e) => setPrenom(e.target.value)}/>
@@ -124,12 +131,17 @@ const FicheArtisan = () => {
 
           <section className="mb-3">
             <label htmlFor="name" className="form-label">Nom</label>
-            <input type="name" className="form-control" id="name" placeholder="Nom" onChange={(e) => setNom(e.target.value)}/>
+            <input type="text" className="form-control" id="name" placeholder="Nom" onChange={(e) => setNom(e.target.value)}/>
           </section>
 
           <section className="mb-3">
             <label htmlFor="email" className="form-label">Adresse mail</label>
-            <input type="email" className="form-control" id="email" placeholder="name@example.com" onChange={(e) => setEmail(e.target.value)}/>
+            <input type="email" className="form-control" id="email" placeholder="Objet du mail" onChange={(e) => setEmail(e.target.value)}/>
+          </section>
+
+          <section className="mb-3">
+            <label htmlFor="object" className="form-label">Adresse mail</label>
+            <input type="text" className="form-control" id="object" placeholder="name@example.com" onChange={(e) => setEmail(e.target.value)}/>
           </section>
 
           <section className="mb-3">

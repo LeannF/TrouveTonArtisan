@@ -38,7 +38,7 @@ const Card = () => {
               <div>
                 <section className="p-2">
                   <span>Spécialité:</span>
-                  <h3 className="card-subtitle mb-2 text-body-secondary"> {artisan.Specialite.nom_specialite}</h3>
+                  <h3 className="card-subtitle mb-2"> {artisan.Specialite.nom_specialite}</h3>
                 </section>
                 <section className="p-2">
                   <span>Localistation:</span>

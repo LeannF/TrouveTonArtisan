@@ -55,11 +55,11 @@ body {
 h1, h2 {
   padding: 0.5em;
   text-align: center;
-  color: #cd2c2e;
+  color: #cd2c2e !important;
 }
 
 .card{
-  width: 100%;
+  width: 80%;
   max-width: 450px;
   box-shadow: 0 5px 15px #384050;
 }
@@ -77,6 +77,10 @@ ol {
   list-style-position: inside;
   text-align: center;
   font-size: larger;
+}
+
+.card-title{
+  color: #0074C7 !important;
 }
 
 #card-list{
@@ -103,4 +107,19 @@ ol {
 form{
   width: 50%;
   margin: auto;
+}
+
+.btn{
+  background-color: #00497c !important;
+}
+
+span{
+  color: #384050 !important;
+}
+
+.text-box{
+  text-align: center;
+  margin: auto;
+  max-width: 900px;
+  border: 2px #000000;
 }

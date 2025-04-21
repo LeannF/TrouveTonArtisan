@@ -2,6 +2,7 @@
 import Link from 'next/link';
 import "./css/navbar.css";
 import { useEffect, useState } from "react";
+import { useRouter } from 'next/navigation';
 
 const Navbar = () => {
     useEffect(() => {
@@ -11,8 +12,9 @@ const Navbar = () => {
     }, []);
     
     const [search, setSearch] = useState('');
-    const [results, setResults] = useState([]); // Assurez-vous que results est un tableau vide
+    const [results, setResults] = useState([]); 
     const [categories, setCat] = useState([]);
+    const router = useRouter();
 
     useEffect(() => {
         if (!categories) return; // Si aucune catégorie n'est présente, on ne fait rien
@@ -27,7 +29,32 @@ const Navbar = () => {
           .catch((error) => {
             console.error("Erreur lors de la récupération des catégories :", error);
           });
-      }, []); 
+    }, []); 
+
+    useEffect(() => {
+        const delayDebounce = setTimeout(() => {
+            const fetchResults = async () => {
+                if (search.trim() === '') {
+                    setResults([]);
+                    return;
+                }
+    
+                try {
+                    const response = await fetch(`http://localhost:5000/artisan/${encodeURIComponent(search)}`);
+                    if (!response.ok) throw new Error('Erreur de réseau');
+    
+                    const data = await response.json();
+                    setResults(Array.isArray(data) ? data : []);
+                } catch (error) {
+                    console.error('Erreur lors de la récupération des données: ', error);
+                }
+            };
+    
+            fetchResults();
+        }, 300); // attends 300ms après la dernière frappe
+    
+        return () => clearTimeout(delayDebounce); // clean si l'utilisateur tape encore
+    }, [search]);
 
     const handleSearch = async (query) => {
         if (query.trim() === '') {
@@ -41,17 +68,20 @@ const Navbar = () => {
                 throw new Error('Erreur de réseau');
             }
             const data = await response.json();
-            setResults(Array.isArray(data) ? data : []); // S'assurer que les résultats sont bien un tableau
-            console.log("Resultats: ", results)
+            setResults(Array.isArray(data) ? data : []); // S'assure que les résultats sont bien un tableau
+            if (data.length === 1) {
+                router.push(`/ficheArtisan/${encodeURIComponent(data[0].nom_artisan)}`);
+            }
+            else {
+                setResults(data); // au cas où tu veux voir la liste même sans rediriger
+            }
         } catch (error) {
             console.error('Erreur lors de la récupération des données: ', error);
         }
     };
 
     const handleChange = (e) => {
-        const query = e.target.value;
-        setSearch(query);
-        handleSearch(query); // Appelle l'API dès qu'il y a un changement
+        setSearch(e.target.value); // Appelle l'API dès qu'il y a un changement
     };
 
     return (
@@ -82,8 +112,14 @@ const Navbar = () => {
                         <input className="form-control" type="search" placeholder="Rechercher un artisan"
                             value={search}
                             onChange={handleChange}
+                            onKeyDown={(e) => {
+                                if (e.key === 'Enter') {
+                                    e.preventDefault(); // Empêche un éventuel submit
+                                    handleSearch(search); // Lance la recherche avec la valeur actuelle
+                                }
+                            }}
                         />
-                        <button className="bi bi-search position-absolute end-0"></button>
+                        <button className="bi bi-search position-absolute end-0" onClick={() => handleSearch(search)}></button>
                     </div>
                     {Array.isArray(results) && results.length > 0 && (
                         <ul className="position-absolute bg-white border border-gray-300 mt-1 p-2 z-2 list-group" id="resultList">
