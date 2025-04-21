@@ -2,11 +2,11 @@ const { Sequelize } = require("sequelize");
 require("dotenv").config(); // Charger les variables d'environnement
 
 const sequelize = new Sequelize(
-  process.env.DB_NAME,   // DB_NAME 'artisans',
-  process.env.DB_USER,    // DB_USER 'LeyLey',
-  process.env.DB_PASS,   // DB_PASS 'LeyLey2',
+  process.env.DB_NAME, 
+  process.env.DB_USER, 
+  process.env.DB_PASS, 
   {
-    host: process.env.DB_HOST, // DB_HOST 'localhost',
+    host: process.env.DB_HOST, 
     dialect: "mysql",
   }
 );

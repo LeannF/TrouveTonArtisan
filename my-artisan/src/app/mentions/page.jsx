@@ -1,7 +1,9 @@
-const Mentions = () => {
-    <main>
-        <h1>Page en construction</h1>
-    </main>
+import ComingSoon from "../components/incoming";
+
+function Mentions () {
+    return(
+        <ComingSoon title="Données"/>
+    )
 }
 
 export default Mentions;

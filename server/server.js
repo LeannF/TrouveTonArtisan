@@ -5,9 +5,11 @@ const categorieRouter = require("./routes/categorie");
 const specialityRouter = require("./routes/speciality");
 const cityRouter = require("./routes/city");
 
+const cors = require('cors');
 
 const app = express();
 app.use(express.json()); // Permet de lire le JSON dans les requêtes
+app.use(cors());
 
 // Synchroniser la base de données
 sequelize.sync({ force: false }) // Mettre à `true` pour recréer les tables

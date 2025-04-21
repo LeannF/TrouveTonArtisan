@@ -2,10 +2,10 @@ const {Specialite} = require('../models');
 
 exports.getSpecialities = async (req, res) => {
   try {
-    // Attends que les categories soient récupérées
+    // Attends que les specialities soient récupérées
     const specialities = await Specialite.findAll(); 
     
-    // Envoie les categories sous forme de réponse JSON
+    // Envoie les specialities sous forme de réponse JSON
     res.json(specialities); 
   } catch (error) {
     console.error(error); // Logge l'erreur pour débogage
@@ -17,12 +17,12 @@ exports.getSpecialities = async (req, res) => {
 exports.getSpecialityByName = async (req, res) => {
   try {
     const {nomSpe} = req.params;
-    // Attends que les villes soient récupérées
-    const speArtisan = await Specialite.findAll({
+    // Attends que les specialities soient récupérées
+    const speArtisan = await Specialite.findOne({
       where: {nom_specialite : nomSpe}
     }); 
     
-    // Envoie les artisans sous forme de réponse JSON
+    // Envoie les specialities sous forme de réponse JSON
     res.json(speArtisan); 
   } catch (error) {
     console.error(error); // Logge l'erreur pour débogage

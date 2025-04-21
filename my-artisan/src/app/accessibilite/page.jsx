@@ -1,7 +1,9 @@
-const Access = () => {
-    <main>
-        <h1>Page en construction</h1>
-    </main>
+import ComingSoon from "../components/incoming";
+
+function Access () {
+    return(
+        <ComingSoon title="Accessibilités"/>
+    )
 }
 
 export default Access;

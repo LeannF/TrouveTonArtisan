@@ -1,5 +1,3 @@
-@import 'bootstrap/dist/css/bootstrap.css';
-
 @font-face {
   font-family: 'Graphik';
   src: url('/assets/fonts/Graphik-Regular-Trial.otf') format('truetype');
@@ -28,6 +26,8 @@ body {
   font-family: Arial, Helvetica, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  height: 100%;
+  margin: 0;
 }
 
 * {
@@ -42,6 +42,84 @@ body {
   }
 }
 
-button{
-  background-color: #CD2C2E;
+.page-wrapper{
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+.content{
+  flex: 1;
+}
+
+h1, h2 {
+  padding: 0.5em;
+  text-align: center;
+  color: #cd2c2e !important;
+}
+
+.card{
+  width: 80%;
+  max-width: 450px;
+  box-shadow: 0 5px 15px #384050;
+}
+
+.link{
+  text-decoration: none;
+  color: black ;
+}
+
+.link:hover{
+  color: #0074C7 !important;
+}
+
+ol {
+  list-style-position: inside;
+  text-align: center;
+  font-size: larger;
+}
+
+.card-title{
+  color: #0074C7 !important;
+}
+
+#card-list{
+  width: 100%;
+  max-width: 450px;
+  text-decoration: none;
+}
+
+.card-body{
+  display: flex;
+  justify-content: space-between;
+}
+
+.rating{
+  display: flex;
+  align-items: center; 
+  justify-content: flex-end;
+}
+
+.bi[class*="star"]{
+  color: #82b864 !important;
+}
+
+form{
+  width: 50%;
+  margin: auto;
+}
+
+.btn{
+  background-color: #00497c !important;
+}
+
+span{
+  color: #384050 !important;
+}
+
+.text-box{
+  text-align: center;
+  margin: auto;
+  max-width: 900px;
+  border: 2px #000000;
 }
