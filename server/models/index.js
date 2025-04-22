@@ -2,7 +2,7 @@ const Sequelize = require('sequelize');
 const sequelize = require('../db/config');
 
 const Artisan = require('./artisan');
-const Specialite = require('./Speciality');
+const Specialite = require('./speciality');
 const Categorie = require('./Categorie');
 const City = require('./City');
 
