@@ -1,6 +1,6 @@
-import "./globals.css";
-import Footer from "./components/footer";
-import Navbar from "./components/navbar";
+import '../styles/main.scss';
+import Footer from "../components/footer";
+import Navbar from "../components/navbar";
 import 'bootstrap-icons/font/bootstrap-icons.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 

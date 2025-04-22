@@ -1,10 +1,10 @@
-INSERT INTO categorie VALUES
+INSERT INTO Categorie VALUES
 (NULL, "Alimentation"),
 (NULL, "Bâtiment"),
 (NULL, "Fabrication"),
 (NULL, "Services");
 
-INSERT INTO specialite VALUES
+INSERT INTO Specialite VALUES
 (NULL, "Boucher", 1),
 (NULL, "Boulanger", 1),
 (NULL, "Chocolatier", 1),
@@ -21,7 +21,7 @@ INSERT INTO specialite VALUES
 (NULL, "Toiletteur", 4),
 (NULL, "Webdesign", 4);
 
-INSERT INTO ville VALUES
+INSERT INTO Ville VALUES
 (NULL, "Lyon"),
 (NULL, "Montélimar"),
 (NULL, "Evian"),
@@ -37,7 +37,7 @@ INSERT INTO ville VALUES
 (NULL, "Annonay"),
 (NULL, "Valence");
 
-INSERT INTO artisan VALUES
+INSERT INTO Artisan VALUES
 (NULL, "Boucherie Dumont", 1, 4.5, 1, "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus eleifend ante sem, id volutpat massa fermentum nec. Praesent volutpat scelerisque mauris, quis sollicitudin tellus sollicitudin.", "boucherie.dumond@gmail.com", NULL, 1, DEFAULT ),
 (NULL, "Au pain chaud", 2, 4.8, 2, "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus eleifend ante sem, id volutpat massa fermentum nec. Praesent volutpat scelerisque mauris, quis sollicitudin tellus sollicitudin.", "baupainchaud@hotmail.com", NULL, 1, 1),
 (NULL, "Chocolaterie Labbé", 3, 4.9, 1, "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus eleifend ante sem, id volutpat massa fermentum nec. Praesent volutpat scelerisque mauris, quis sollicitudin tellus sollicitudin.", "chocolaterie-labbe@gmail.com", "https://chocolaterie-labbe.fr", 1, 1),
