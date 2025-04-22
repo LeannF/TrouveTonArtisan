@@ -1,0 +1,21 @@
+$title-color:#cd2c2e;
+$bg-color: #F1F8FC;
+$hover-color: #0074C7;
+$btn-color: #00497c;
+$span-color: #384050;
+$card-title-color: #0074C7;
+$star-color: #82b864;
+
+@mixin center{
+    text-align: center;
+}
+
+@mixin link-style{
+    text-decoration: none;
+    color: #000000;
+}
+
+@mixin d-flex{
+    display: flex;
+    flex-direction: column;
+}

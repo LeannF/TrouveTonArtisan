@@ -1,0 +1,135 @@
+@use './navbar';
+@use './variables' as *;
+
+@font-face {
+    font-family: 'Graphik';
+    src: url('/my-artisan/public/assets/font/Graphik-Regular-Trial.otf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+:root {
+--background: #ffffff;
+}
+
+@media (prefers-color-scheme: dark) {
+    :root {
+        --foreground: #000000;
+    }
+}
+
+html, body {
+    overflow-x: hidden;
+}
+
+body {
+    color: var(--foreground);
+    background: var(--background);
+    font-family: 'Graphik', sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    height: 100%;
+    margin: 0;
+}
+
+* {
+    box-sizing: border-box;
+    padding: 0;
+    margin: 0;
+}
+
+@media (prefers-color-scheme: dark) {
+    html {
+        color-scheme: dark;
+    }
+}
+
+.page-wrapper{
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+.content{
+    flex: 1;
+}
+
+h1, h2 {
+    @include center;
+    padding: 0.5em;
+    color: $title-color !important;
+}
+
+.card{
+    width: 80%;
+    max-width: 450px;
+    box-shadow: 0 5px 15px #384050;
+}
+
+.link{
+    @include link-style;
+}
+
+.link:hover{
+    color: $hover-color !important;
+}
+
+ol {
+    list-style-position: inside;
+    @include center;
+    font-size: larger;
+}
+
+.card-title{
+    color: $card-title-color !important;
+}
+
+#card-list{
+    width: 100%;
+    max-width: 450px;
+    @include link-style;
+}
+
+.card-body{
+    display: flex;
+    justify-content: space-between;
+}
+
+.rating{
+    display: flex;
+    align-items: center; 
+    justify-content: flex-end;
+}
+
+.bi[class*="star"]{
+    color: $star-color !important;
+}
+
+form{
+    width: 50%;
+    margin: auto;
+}
+
+.btn{
+    background-color: $btn-color !important;
+}
+
+span{
+color: $span-color !important;
+}
+
+.text-box{
+    @include center;
+    margin: auto;
+    max-width: 900px;
+    border: 2px #000000;
+}
+
+footer{
+    background-color: $bg-color;
+    width: 100%;
+    h2{
+        @include center;
+        padding: 0.5em;
+    }
+}
