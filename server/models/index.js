@@ -3,8 +3,8 @@ const sequelize = require('../db/config');
 
 const Artisan = require('./artisan');
 const Specialite = require('./speciality');
-const Categorie = require('./Categorie');
-const City = require('./City');
+const Categorie = require('./categorie');
+const City = require('./city');
 
 const db = {
   sequelize,
