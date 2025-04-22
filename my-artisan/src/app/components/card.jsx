@@ -16,11 +16,11 @@ const Card = () => {
   
     for (let i = 1; i <= 5; i++) {
       if (note >= i) {
-        stars.push(<span key={`${id_artisan}-star-${i}`} className="bi bi-star-fill"></span>); // pleine
+        stars.push(<span key={`${id_artisan}-star-${i}`} className="bi bi-star-fill"></span>); 
       } else if (note >= i - 0.5) {
-        stars.push(<span key={`${id_artisan}-star-${i}`} className="bi bi-star-half"></span>); // demi 
+        stars.push(<span key={`${id_artisan}-star-${i}`} className="bi bi-star-half"></span>);  
       } else {
-        stars.push(<span key={`${id_artisan}-star-${i}`} className="bi bi-star"></span>); // vide
+        stars.push(<span key={`${id_artisan}-star-${i}`} className="bi bi-star"></span>); 
       }
     }
     return <>{stars}</>;
