@@ -58,7 +58,7 @@ CREATE TABLE IF NOT EXISTS `artisan` (
     `id_specialite` int NOT NULL,
     `note` decimal(5,2),
     `id_ville` int NOT NULL,
-    `apropos` text,
+    `apropos` ,
     `email` varchar(100) NOT NULL,
     `lien_site` varchar(100),
     `id_categorie` int NOT NULL,
