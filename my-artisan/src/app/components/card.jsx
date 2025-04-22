@@ -6,7 +6,7 @@ const Card = () => {
   const [artisans, setArtisans] = useState([]);
 
   useEffect(() => {
-    fetch("http://localhost:5000/artisan")
+    fetch("https://trouvetonartisan-d7k5.onrender.com/artisan")
       .then((res) => res.json())
       .then((data) => setArtisans(data));
   }, []);

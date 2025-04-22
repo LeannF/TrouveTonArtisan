@@ -12,7 +12,7 @@ const FicheArtisan = () => {
   useEffect(() => {
     if (!artisanName) return; // attend que l'URL soit dispo
   
-    fetch(`http://localhost:5000/artisan/${encodeURIComponent(artisanName)}`)
+    fetch(`https://trouvetonartisan-d7k5.onrender.com/artisan/${encodeURIComponent(artisanName)}`)
       .then((res) => res.json())
       .then((data) => {
         if (Array.isArray(data) && data.length > 0) {
@@ -58,7 +58,7 @@ const FicheArtisan = () => {
     };
   
     try {
-      const res = await fetch(`http://localhost:5000/artisan/${encodeURIComponent(artisanName)}/sendEmail`, {
+      const res = await fetch(`https://trouvetonartisan-d7k5.onrender.com/artisan/${encodeURIComponent(artisanName)}/sendEmail`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(data),

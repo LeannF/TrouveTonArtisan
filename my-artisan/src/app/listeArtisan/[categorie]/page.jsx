@@ -14,7 +14,7 @@ const ListeArtisan = () => {
     if (!categorie) return; // Si aucune catégorie n'est présente, on ne fait rien
 
     // Fetch les artisans en fonction de la catégorie
-    fetch(`http://localhost:5000/artisan/categorie/${categorie}`)
+    fetch(`https://trouvetonartisan-d7k5.onrender.com/artisan/categorie/${categorie}`)
       .then((res) => res.json())
       .then((data) => {setArtisans(data);})
   }, [categorie]); // Se déclenche chaque fois que la catégorie change

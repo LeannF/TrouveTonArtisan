@@ -20,7 +20,7 @@ const Navbar = () => {
         if (!categories) return; // Si aucune catégorie n'est présente, on ne fait rien
     
         // Fetch les artisans en fonction de la catégorie
-        fetch(`http://localhost:5000/categorie/`)
+        fetch(`https://trouvetonartisan-d7k5.onrender.com/categorie/`)
           .then((res) => res.json())
           .then((data) => {setCat(data);})
           
@@ -34,7 +34,7 @@ const Navbar = () => {
                     return;
                 }
                 try {
-                    const response = await fetch(`http://localhost:5000/artisan/${encodeURIComponent(search)}`);
+                    const response = await fetch(`https://trouvetonartisan-d7k5.onrender.com/artisan/${encodeURIComponent(search)}`);
                     if (!response.ok) throw new Error('Erreur de réseau');
     
                     const data = await response.json();
@@ -57,7 +57,7 @@ const Navbar = () => {
         }
 
         try {
-            const response = await fetch(`http://localhost:5000/artisan/${encodeURIComponent(query)}`);
+            const response = await fetch(`https://trouvetonartisan-d7k5.onrender.com/artisan/${encodeURIComponent(query)}`);
             if (!response.ok) {
                 throw new Error('Erreur de réseau');
             }
