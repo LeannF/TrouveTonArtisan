@@ -16,6 +16,9 @@ sequelize.sync({ logging: false })
   .then()
   .catch(console.error("Erreur de synchro"));
   
+app.get('/', (req, res) => {
+  res.send('Bienvenue sur TrouveTonArtisan 👷‍♀️✨');
+});
 // Routes
 app.use("/artisan", artisanRouter);
 app.use("/categorie", categorieRouter);
