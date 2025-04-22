@@ -88,7 +88,7 @@ const Navbar = () => {
                 <div className="row">
                     <div className="col-8" id="logo">
                         <Link href="/">
-                            <img src="/assets/logo/logo.png" alt="Logo trouve ton artisan"/>
+                            <img src="/assets/logo/Logo.png" alt="Logo trouve ton artisan"/>
                         </Link>
                     </div>
                         <div className="collapse navbar-collapse col-4 end-0" id="navbarText">
