@@ -1,7 +1,7 @@
 "use client";
 import Link from 'next/link';
 import { useEffect, useState } from "react";
-import { usePathname } from "next/navigation"; // Importation de usePathname
+import { usePathname } from "next/navigation"; 
 
 const ListeArtisan = () => {
   const [artisans, setArtisans] = useState([]);
@@ -16,13 +16,7 @@ const ListeArtisan = () => {
     // Fetch les artisans en fonction de la catégorie
     fetch(`http://localhost:5000/artisan/categorie/${categorie}`)
       .then((res) => res.json())
-      .then((data) => {
-        console.log("Artisans récupérés :", data);
-        setArtisans(data);
-      })
-      .catch((error) => {
-        console.error("Erreur lors de la récupération des artisans :", error);
-      });
+      .then((data) => {setArtisans(data);})
   }, [categorie]); // Se déclenche chaque fois que la catégorie change
 
   const renderStars = (note, id_artisan) => {
@@ -30,11 +24,11 @@ const ListeArtisan = () => {
   
     for (let i = 1; i <= 5; i++) {
       if (note >= i) {
-        stars.push(<span key={`${id_artisan}-star-${i}`} className="bi bi-star-fill"></span>); // pleine
+        stars.push(<span key={`${id_artisan}-star-${i}`} className="bi bi-star-fill"></span>); 
       } else if (note >= i - 0.5) {
-        stars.push(<span key={`${id_artisan}-star-${i}`} className="bi bi-star-half"></span>); // demi 
+        stars.push(<span key={`${id_artisan}-star-${i}`} className="bi bi-star-half"></span>);  
       } else {
-        stars.push(<span key={`${id_artisan}-star-${i}`} className="bi bi-star"></span>); // vide
+        stars.push(<span key={`${id_artisan}-star-${i}`} className="bi bi-star"></span>);
       }
     }
   
