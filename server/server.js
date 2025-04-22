@@ -12,7 +12,7 @@ app.use(express.json()); // Permet de lire le JSON dans les requêtes
 app.use(cors());
 
 // Synchroniser la base de données
-sequelize.sync({ force: false }) // Mettre à `true` pour recréer les tables
+sequelize.sync({ alter: true }) // Mettre à `true` pour recréer les tables
   .then()
   .catch(console.error("Erreur de synchro"));
   
