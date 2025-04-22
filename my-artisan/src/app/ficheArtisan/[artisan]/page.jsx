@@ -6,27 +6,21 @@ import { usePathname } from 'next/navigation';
 
 const FicheArtisan = () => {
   const pathname = usePathname(); // Utilisation de usePathname pour récupérer l'URL
-  const artisanName  = decodeURIComponent(pathname.split("/").pop()); // nom_artisan depuis l'URL
+  const artisanName  = decodeURIComponent(pathname.split("/").pop());
   const [artisan, setArtisan] = useState(null);
-  const [artisans, setArtisans] = useState([]);
-
   
   useEffect(() => {
-    if (!artisanName) return; // attendre que l'URL soit dispo
-
-      fetch(`http://localhost:5000/artisan/${encodeURIComponent(artisanName)}`)
-        .then((res) => res.json())
-        .then((data) => {
-          if (Array.isArray(data) && data.length > 0) {
-            setArtisan(data[0]); // Si un artisan est trouvé, on le sélectionne
-          } else {
-            setArtisan(null); // Aucune correspondance
-          }
-        })
-        .catch((error) => {
-          console.error("Erreur lors de la récupération des artisans :", error);
-        });
-
+    if (!artisanName) return; // attend que l'URL soit dispo
+  
+    fetch(`http://localhost:5000/artisan/${encodeURIComponent(artisanName)}`)
+      .then((res) => res.json())
+      .then((data) => {
+        if (Array.isArray(data) && data.length > 0) {
+          setArtisan(data[0]); // Si un artisan est trouvé, on le sélectionne
+        } else {
+          setArtisan(null); // Aucune correspondance
+        }
+      })
   }, [artisanName]);
 
   const renderStars = (note, id_artisan) => {
@@ -34,14 +28,13 @@ const FicheArtisan = () => {
   
     for (let i = 1; i <= 5; i++) {
       if (note >= i) {
-        stars.push(<span key={`${id_artisan}-star-${i}`} className="bi bi-star-fill"></span>); // pleine
+        stars.push(<span key={`${id_artisan}-star-${i}`} className="bi bi-star-fill"></span>); 
       } else if (note >= i - 0.5) {
-        stars.push(<span key={`${id_artisan}-star-${i}`} className="bi bi-star-half"></span>); // demi 
+        stars.push(<span key={`${id_artisan}-star-${i}`} className="bi bi-star-half"></span>); 
       } else {
-        stars.push(<span key={`${id_artisan}-star-${i}`} className="bi bi-star"></span>); // vide
+        stars.push(<span key={`${id_artisan}-star-${i}`} className="bi bi-star"></span>); 
       }
     }
-
     return <>{stars}</>;
   };
 
@@ -50,18 +43,18 @@ const FicheArtisan = () => {
   const [nom, setNom] = useState("");
   const [email, setEmail] = useState("");
   const [message, setMessage] = useState("");
+  const [objet, setObjet] = useState("");
 
   const handleSubmit = async (e) => {
     e.preventDefault(); // Empêcher le rechargement de la page
-    console.log(artisan.email);  // Pour vérifier la valeur de artisan.email
-    console.log('Formulaire soumis', { prenom, nom, email, message }); // Vérification des données du formulaire
 
     const data = {
       prenom,
       nom,
       email,
+      objet,
       message,
-      nomArt: artisan.nom_artisan // L'adresse email de l'artisan
+      nomArt: artisan.nom_artisan 
     };
   
     try {
@@ -71,11 +64,10 @@ const FicheArtisan = () => {
         body: JSON.stringify(data),
       });
   
-      // Assurez-vous que la réponse est en JSON
+      // Assure que la réponse est en JSON
       const result = await res.json();
       alert(result.message); // Affiche le message reçu du serveur
     } catch (error) {
-      console.error("Erreur lors de l'envoi de l'email :", error);
       alert("Une erreur est survenue lors de l'envoi de l'email.");
     }
   };
@@ -140,8 +132,8 @@ const FicheArtisan = () => {
           </section>
 
           <section className="mb-3">
-            <label htmlFor="object" className="form-label">Adresse mail</label>
-            <input type="text" className="form-control" id="object" placeholder="name@example.com" onChange={(e) => setEmail(e.target.value)}/>
+            <label htmlFor="object" className="form-label">Objet</label>
+            <input type="text" className="form-control" id="object" placeholder="Entrez l'objet de votre message" onChange={(e) => setObjet(e.target.value)}/>
           </section>
 
           <section className="mb-3">

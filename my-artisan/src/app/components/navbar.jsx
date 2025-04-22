@@ -22,13 +22,8 @@ const Navbar = () => {
         // Fetch les artisans en fonction de la catégorie
         fetch(`http://localhost:5000/categorie/`)
           .then((res) => res.json())
-          .then((data) => {
-            console.log("Catégories récupérées :", data);
-            setCat(data);
-          })
-          .catch((error) => {
-            console.error("Erreur lors de la récupération des catégories :", error);
-          });
+          .then((data) => {setCat(data);})
+          
     }, []); 
 
     useEffect(() => {
@@ -38,7 +33,6 @@ const Navbar = () => {
                     setResults([]);
                     return;
                 }
-    
                 try {
                     const response = await fetch(`http://localhost:5000/artisan/${encodeURIComponent(search)}`);
                     if (!response.ok) throw new Error('Erreur de réseau');
@@ -46,7 +40,7 @@ const Navbar = () => {
                     const data = await response.json();
                     setResults(Array.isArray(data) ? data : []);
                 } catch (error) {
-                    console.error('Erreur lors de la récupération des données: ', error);
+                    console.error('Erreur lors de la récupération des données');
                 }
             };
     
@@ -73,10 +67,10 @@ const Navbar = () => {
                 router.push(`/ficheArtisan/${encodeURIComponent(data[0].nom_artisan)}`);
             }
             else {
-                setResults(data); // au cas où tu veux voir la liste même sans rediriger
+                setResults(data);
             }
         } catch (error) {
-            console.error('Erreur lors de la récupération des données: ', error);
+            console.error('Erreur lors de la récupération des données');
         }
     };
 

@@ -97,7 +97,7 @@ exports.sendEmail = async (req, res) => {
     return res.status(405).send('Méthode non autorisée');
   }
 
-  const { nomArt, prenom, nom, email, message } = req.body;
+  const { nomArt, prenom, nom, email, objet, message } = req.body;
 
   try {
     const artisan = await Artisan.findOne({ where: { nom_artisan: { [Op.like]: `%${nomArt}%` } } });
@@ -119,8 +119,8 @@ exports.sendEmail = async (req, res) => {
     const mailOptions = {
       from: `"${prenom} ${nom}" <${email}>`,
       to: artisan.email,
-      subject: `Message de ${prenom} ${nom}`,
-      text: `Nom: ${prenom} ${nom}\nEmail: ${email}\nMessage: ${message}`,
+      subject: `Message de ${prenom} ${nom} - ${objet}`,
+      text: `Nom: ${prenom} ${nom}\nEmail: ${email}\nObjet: ${objet}\nMessage: ${message}`,
     };
 
     await transporter.sendMail(mailOptions);

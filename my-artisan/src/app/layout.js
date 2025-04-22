@@ -3,7 +3,6 @@ import Footer from "./components/footer";
 import Navbar from "./components/navbar";
 import 'bootstrap-icons/font/bootstrap-icons.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import { createPopper } from '@popperjs/core';
 
 
 export const metadata = {
