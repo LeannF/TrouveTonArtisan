@@ -1,5 +1,6 @@
 const {Categorie} = require('../models');
 
+//Fonction pour récupérer toutes les catégories
 exports.getCategories = async (req, res) => {
   try {
     // Attends que les categories soient récupérées
@@ -7,11 +8,11 @@ exports.getCategories = async (req, res) => {
     
     // Envoie les categories sous forme de réponse JSON
     res.json(categories); 
-} catch (error) {
+  } catch (error) {
     console.error(error); // Logge l'erreur pour débogage
     // Envoie un message d'erreur si une exception se produit
     res.status(500).json({ message: "Categories not found" });
-}
+  }
 };
 
 exports.getOneCategorie = async (req, res) => {

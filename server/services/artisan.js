@@ -96,36 +96,31 @@ exports.sendEmail = async (req, res) => {
   if (req.method !== 'POST') {
     return res.status(405).send('Méthode non autorisée');
   }
-
   const { nomArt, prenom, nom, email, objet, message } = req.body;
-
   try {
-    const artisan = await Artisan.findOne({ where: { nom_artisan: { [Op.like]: `%${nomArt}%` } } });
-
+    // Utilisation de Op.like pour permettre une recherche partielle
+    const artisan = await Artisan.findOne({ where: { nom_artisan: { [Op.like]: `%${nomArt}%` } } }); 
     if (!artisan) {
       return res.status(404).json({ message: `Aucun artisan trouvé pour le nom : ${nomArt}` });
     }
-
+    // Les identifiants sont stockés dans des variables d'environnement pour la sécurité
     const transporter = nodemailer.createTransport({
-      service: 'gmail',
-      port: 587,
-      secure: false,
+      service: 'gmail', // Configuration du service d'envoi d'email avec Gmail
+      port: 587, // Port SMTP standard pour TLS
+      secure: false, // false = utilisation de STARTTLS
       auth: {
         user: process.env.EMAIL_SENDER,
         pass: process.env.EMAIL_PASS,
       },
     });
-
     const mailOptions = {
       from: `"${prenom} ${nom}" <${email}>`,
       to: artisan.email,
       subject: `Message de ${prenom} ${nom} - ${objet}`,
       text: `Nom: ${prenom} ${nom}\nEmail: ${email}\nObjet: ${objet}\nMessage: ${message}`,
     };
-
     await transporter.sendMail(mailOptions);
     res.status(200).json({ message: 'Message envoyé !' });
-
   } catch (err) {
     console.error("Erreur lors de l'envoi :", err);
     res.status(500).json({ message: 'Erreur : ' + err.message });

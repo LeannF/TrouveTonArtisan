@@ -28,8 +28,8 @@ const Card = () => {
   return (
     <main>
       <div className="row justify-content-center mb-4">
-        {artisans.filter((a) => a.top == true).map((artisan) => (
-          <div className="card col-md-4 col-sm-12 m-3 my-4 " key={artisan.id_artisan}>
+        {artisans.filter((a) => a.top == true).map((artisan) => ( // récupère les artisans présents dans le top
+          <div className="card col-md-4 col-sm-12 m-3 my-4 " key={artisan.id_artisan}> 
             <div className="card-header">
               <h2 className="card-title">{artisan.nom_artisan}</h2>
             </div>
@@ -45,7 +45,7 @@ const Card = () => {
                 </section>
               </div>
               <section className="rating">
-                <span className="d-flex">{renderStars(artisan.note, artisan.id_artisan)}</span>
+                <span className="d-flex">{renderStars(artisan.note, artisan.id_artisan)}</span> 
               </section>
             </div>
           </div>
